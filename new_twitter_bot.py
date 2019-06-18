@@ -3,7 +3,7 @@ import time
 # NOTE: I put my keys in the keys.py to separate them
 # from this main file.
 # Please refer to keys_format.py to see the format.
-from keys import *
+from os import environ
 
 # NOTE: flush=True is just for running this script
 # with PythonAnywhere's always-on task.
@@ -11,6 +11,10 @@ from keys import *
 print('this is my twitter bot', flush=True)
 
 #Lets the bot interact with twitter using the dev keys
+CONSUMER_KEY = environ['CONSUMER_KEY']
+CONSUMER_SECRET = environ['CONSUMER_SECRET']
+ACCESS_KEY = environ['ACCESS_KEY']
+ACCESS_SECRET = environ['ACCESS_SECRET']
 auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
 auth.set_access_token(ACCESS_KEY, ACCESS_SECRET)
 api = tweepy.API(auth)
@@ -45,11 +49,11 @@ def reply_to_tweets():
         hashtag_found = False
         empty_str = ""
         store_last_seen_id(last_seen_id, FILE_NAME)
-        if '#helloworld' in mention.full_text.lower():
-            print('found #helloworld!', flush=True)
-            print('responding back...', flush=True)
-            api.update_status('@' + mention.user.screen_name +
-                    '#HelloWorld back to you!', mention.id)
+        #if '#helloworld' in mention.full_text.lower():
+            #print('found #helloworld!', flush=True)
+            #print('responding back...', flush=True)
+            #api.update_status('@' + mention.user.screen_name +
+                    #'#HelloWorld back to you!', mention.id)
         if '#' in mention.full_text:
             hashtag_fulltext = mention.full_text
             for character in hashtag_fulltext:
