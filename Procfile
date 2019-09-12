@@ -1,2 +1,2 @@
-web: python server.py
+web: python tbserver.py
 worker: python3 new_twitter_bot.py
